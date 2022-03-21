@@ -27,9 +27,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<String> nav = ['Список 1', 'Список 2'];
-  final List fakeData = List.generate(100, (index) => index.toString());
-
   Map<String, dynamic> data = {
     'Мои фото': [
       'https://picsum.photos/1200/501',
@@ -60,19 +57,35 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: nav.length,
+      length: data.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Homework example'),
+          title: Text('Просмотр изображений'),
+          centerTitle: true,
+          bottom: TabBar(
+            tabs: data.keys.map((String item) => Tab(text: item)).toList(),
+          ),
         ),
         body: TabBarView(
-          children: nav.map((name) {
+          children: data.keys.map((name) {
             return ListView(
               key: PageStorageKey(name),
               children: <Widget>[
-                ...fakeData.map((e) {
-                  return Text(e);
-                }).toList()
+                // data.forEach((key, value) {
+                //   if (key == name)
+
+                // })
+                for (var item in data.entries)
+                  if (item.key == name)
+                    for (String e in item.value)
+                      Image.network(
+                        '$e',
+                        loadingBuilder: (context, child, loadingProgress) {
+                          return loadingProgress == null
+                              ? child
+                              : LinearProgressIndicator();
+                        },
+                      )
               ],
             );
           }).toList(),
