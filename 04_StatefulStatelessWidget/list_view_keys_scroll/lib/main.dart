@@ -71,21 +71,40 @@ class _MyHomePageState extends State<MyHomePage> {
             return ListView(
               key: PageStorageKey(name),
               children: <Widget>[
-                // data.forEach((key, value) {
-                //   if (key == name)
-
-                // })
                 for (var item in data.entries)
                   if (item.key == name)
                     for (String e in item.value)
-                      Image.network(
-                        '$e',
-                        loadingBuilder: (context, child, loadingProgress) {
-                          return loadingProgress == null
-                              ? child
-                              : LinearProgressIndicator();
-                        },
-                      )
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: 400,
+                      //   margin: const EdgeInsets.all(32.0),
+                      //   padding: const EdgeInsets.all(32.0),
+                      //   child: Image.network(
+                      //     '$e',
+                      //     loadingBuilder: (context, child, loadingProgress) {
+                      //       return loadingProgress == null
+                      //           ? child
+                      //           : LinearProgressIndicator(
+                      //               minHeight: 16,
+                      //             );
+                      //     },
+                      //   ),
+                      // )
+                      Container(
+                        alignment: Alignment.center,
+                        height: 200.0,
+                        width: 500,
+                        margin: const EdgeInsets.all(32),
+                        padding: const EdgeInsets.all(32),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                '$e',
+                              )),
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                      ),
               ],
             );
           }).toList(),
