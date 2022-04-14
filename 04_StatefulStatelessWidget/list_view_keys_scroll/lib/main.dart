@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,13 +16,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  const MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -60,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       length: data.length,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Просмотр изображений'),
+          title: const Text('Просмотр изображений'),
           centerTitle: true,
           bottom: TabBar(
             tabs: data.keys.map((String item) => Tab(text: item)).toList(),
@@ -100,9 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                '$e',
+                                e,
                               )),
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
                         ),
                       ),
               ],
